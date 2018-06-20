@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace ECommercePrototypeEnjo.Core
 {
-    public class Class1
+    public class Product : AuditableEntity
     {
+        public string Title { get; set; }
+        public string Thumbnail { get; set; }
+        public double Price { get; set; }
     }
 }
