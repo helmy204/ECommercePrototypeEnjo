@@ -35,13 +35,22 @@ namespace ECommercePrototypeEnjo.Service
 
         public void Delete(int id)
         {
+            Check.ArgumentNotNullOrDefault<int>("id", id);
+
             ShoppingCartItem shoppingCartItem = _shoppingCartItemRepository.GetById(id);
+
+            Check.EntityNotNull("shoppingCartItem",shoppingCartItem);
+
             _shoppingCartItemRepository.Delete(shoppingCartItem);
         }
 
         public void UpdateProductQuantity(ShoppingCartItem shoppingCartItem)
         {
+            Check.ArgumentNotNullOrDefault<int>("shoppingCartItem.Id", shoppingCartItem.Id);
+
             ShoppingCartItem entity = _shoppingCartItemRepository.GetById(shoppingCartItem.Id);
+
+            Check.EntityNotNull("shoppingCartItem", entity);
 
             entity.Quantity = shoppingCartItem.Quantity;
             entity.UpdatedOn = DateTime.Now;
@@ -52,11 +61,11 @@ namespace ECommercePrototypeEnjo.Service
 
         public List<ShoppingCartItem> GetAllCartItems(int customerId)
         {
+            Check.ArgumentNotNullOrDefault<int>("customerId", customerId);
+
             IQueryable<ShoppingCartItem> shoppingCartItems = _shoppingCartItemRepository.Table.Where(c => c.CustomerId == customerId);
 
             return shoppingCartItems.ToList();
         }
-
-
     }
 }

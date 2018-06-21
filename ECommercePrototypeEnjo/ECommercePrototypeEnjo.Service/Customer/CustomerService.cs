@@ -30,11 +30,20 @@ namespace ECommercePrototypeEnjo.Service
 
         public void ClearShoppingCart(int customerId)
         {
+            Check.ArgumentNotNullOrDefault<int>("customerId", customerId);
+
             Customer customer = _customerRepository.GetById(customerId);
+
+            Check.EntityNotNull("customer", customer);
 
             foreach (var item in customer.ShoppingCartItems)
             {
+                Check.ArgumentNotNullOrDefault<int>("shoppingCartItem.Id", item.Id);
+
                 ShoppingCartItem shoppingCartItem = _shoppingCartItemRepository.GetById(item.Id);
+
+                Check.EntityNotNull("shoppingCartItem", shoppingCartItem);
+
                 _shoppingCartItemRepository.Delete(shoppingCartItem);
             }
 
