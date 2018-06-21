@@ -18,5 +18,10 @@ namespace ECommercePrototypeEnjo.Core
             get { return _shoppingCartItems ?? (_shoppingCartItems = new List<ShoppingCartItem>()); }
             protected set { _shoppingCartItems = value; }
         }
+
+        public void ClearShoppingCart()
+        {
+            this.ShoppingCartItems = null;
+        }
     }
 }

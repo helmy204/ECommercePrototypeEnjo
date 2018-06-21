@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ECommercePrototypeEnjo.Web.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -19,6 +20,8 @@ namespace ECommercePrototypeEnjo.WebApi
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.Formatters.Add(new BrowserJsonFormatter());
         }
     }
 }

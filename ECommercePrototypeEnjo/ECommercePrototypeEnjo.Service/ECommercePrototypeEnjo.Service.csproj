@@ -40,7 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Customer\CustomerService.cs" />
+    <Compile Include="Customer\ICustomerService.cs" />
+    <Compile Include="Product\IProductService.cs" />
+    <Compile Include="Product\ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShoppingCartItem\IShoppingCartItemService.cs" />
+    <Compile Include="ShoppingCartItem\ShoppingCartItemService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ECommercePrototypeEnjo.Core\ECommercePrototypeEnjo.Core.csproj">
+      <Project>{72AD6263-5362-41DC-9B0B-874EA64E1EC5}</Project>
+      <Name>ECommercePrototypeEnjo.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ECommercePrototypeEnjo.Data\ECommercePrototypeEnjo.Data.csproj">
+      <Project>{BD485324-D812-4E7E-848A-EA374A26112A}</Project>
+      <Name>ECommercePrototypeEnjo.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

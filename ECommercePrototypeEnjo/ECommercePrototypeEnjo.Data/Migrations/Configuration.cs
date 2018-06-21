@@ -30,15 +30,15 @@ namespace ECommercePrototypeEnjo.Data.Migrations
 
             context.Products.AddOrUpdate(
                     p => p.Id,
-                        new Product() { Id = 1578, Thumbnail = "https://drive.google.com/uc?id=0BwHQ2cixpSzNdU1JMHBVUmNBMDA", Title = "Bathroom Combiwiper Fibre 28Cm", Price = 30, InsertedOn = DateTime.Now },
-                        new Product() { Id = 1577, Thumbnail = "https://drive.google.com/uc?id=0BwHQ2cixpSzNdU1JMHBVUmNBMDA", Title = "Bathroom Combiwiper Fibre 16Cm", Price = 50, InsertedOn = DateTime.Now },
-                        new Product() { Id = 1576, Thumbnail = "https://drive.google.com/uc?id=0BwHQ2cixpSzNelFhQlRCRjdDTHM", Title = "Bathroom Flexi Fibre 25Cm", Price = 8, InsertedOn = DateTime.Now },
-                        new Product() { Id = 1575, Thumbnail = null, Title = "Bathroom Wand Handle", Price = 33, InsertedOn = DateTime.Now },
-                        new Product() { Id = 1574, Thumbnail = null, Title = "Bathroom Wand Fibre", Price = 15, InsertedOn = DateTime.Now },
-                        new Product() { Id = 1573, Thumbnail = null, Title = "Bathroom Wand Set", Price = 64, InsertedOn = DateTime.Now },
-                        new Product() { Id = 1572, Thumbnail = "https://drive.google.com/uc?id=0BwHQ2cixpSzNckc2STlqNG04VkU", Title = "Bathroom Sponge", Price = 7, InsertedOn = DateTime.Now },
-                        new Product() { Id = 1571, Thumbnail = "https://drive.google.com/uc?id=0BwHQ2cixpSzNNkZzRl9ydV9IVXM", Title = "Bathroom Enjofil", Price = 12, InsertedOn = DateTime.Now },
-                        new Product() { Id = 1570, Thumbnail = "https://drive.google.com/uc?id=0BwHQ2cixpSzNeW1jVzFYYkdMemM", Title = "Bathroom Duocloth", Price = 30, InsertedOn = DateTime.Now }
+                        new Product() { Id = 1, Thumbnail = "https://drive.google.com/uc?id=0BwHQ2cixpSzNdU1JMHBVUmNBMDA", Title = "Bathroom Combiwiper Fibre 28Cm", Price = 30, InsertedOn = DateTime.Now },
+                        new Product() { Id = 2, Thumbnail = "https://drive.google.com/uc?id=0BwHQ2cixpSzNdU1JMHBVUmNBMDA", Title = "Bathroom Combiwiper Fibre 16Cm", Price = 50, InsertedOn = DateTime.Now },
+                        new Product() { Id = 3, Thumbnail = "https://drive.google.com/uc?id=0BwHQ2cixpSzNelFhQlRCRjdDTHM", Title = "Bathroom Flexi Fibre 25Cm", Price = 8, InsertedOn = DateTime.Now },
+                        new Product() { Id = 4, Thumbnail = null, Title = "Bathroom Wand Handle", Price = 33, InsertedOn = DateTime.Now },
+                        new Product() { Id = 5, Thumbnail = null, Title = "Bathroom Wand Fibre", Price = 15, InsertedOn = DateTime.Now },
+                        new Product() { Id = 6, Thumbnail = null, Title = "Bathroom Wand Set", Price = 64, InsertedOn = DateTime.Now },
+                        new Product() { Id = 7, Thumbnail = "https://drive.google.com/uc?id=0BwHQ2cixpSzNckc2STlqNG04VkU", Title = "Bathroom Sponge", Price = 7, InsertedOn = DateTime.Now },
+                        new Product() { Id = 8, Thumbnail = "https://drive.google.com/uc?id=0BwHQ2cixpSzNNkZzRl9ydV9IVXM", Title = "Bathroom Enjofil", Price = 12, InsertedOn = DateTime.Now },
+                        new Product() { Id = 9, Thumbnail = "https://drive.google.com/uc?id=0BwHQ2cixpSzNeW1jVzFYYkdMemM", Title = "Bathroom Duocloth", Price = 30, InsertedOn = DateTime.Now }
                 );
 
         }
