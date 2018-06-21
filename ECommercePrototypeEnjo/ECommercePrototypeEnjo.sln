@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommercePrototypeEnjo.Data
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommercePrototypeEnjo.Service", "ECommercePrototypeEnjo.Service\ECommercePrototypeEnjo.Service.csproj", "{38DBCDC2-D9CF-4EED-92CF-176AE389FE04}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommercePrototypeEnjo.WebClient", "ECommercePrototypeEnjo.WebClient\ECommercePrototypeEnjo.WebClient.csproj", "{C7C7F93F-EBAF-4510-B762-E5B93C0A3587}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{38DBCDC2-D9CF-4EED-92CF-176AE389FE04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38DBCDC2-D9CF-4EED-92CF-176AE389FE04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38DBCDC2-D9CF-4EED-92CF-176AE389FE04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7C7F93F-EBAF-4510-B762-E5B93C0A3587}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7C7F93F-EBAF-4510-B762-E5B93C0A3587}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7C7F93F-EBAF-4510-B762-E5B93C0A3587}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7C7F93F-EBAF-4510-B762-E5B93C0A3587}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{72AD6263-5362-41DC-9B0B-874EA64E1EC5} = {CEFD7A58-7D3D-4E20-876A-09B5F12D294D}
 		{BD485324-D812-4E7E-848A-EA374A26112A} = {CEFD7A58-7D3D-4E20-876A-09B5F12D294D}
 		{38DBCDC2-D9CF-4EED-92CF-176AE389FE04} = {CEFD7A58-7D3D-4E20-876A-09B5F12D294D}
+		{C7C7F93F-EBAF-4510-B762-E5B93C0A3587} = {4B0925D3-F2EB-412A-8623-AB71D86D8A0E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7D01A72D-19F2-401D-A792-2F60EF232A9F}

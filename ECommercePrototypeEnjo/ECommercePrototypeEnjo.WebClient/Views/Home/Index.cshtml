@@ -1,0 +1,171 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+
+<div class="jumbotron">
+    <h1>ECommerce Enjo (Prototype)</h1>
+    <p class="lead">Below are some products for demo purpose.</p>
+    @*<p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+</div>
+
+<div class="row" style="height:1000px;">
+    <div class="col-lg-8">
+        <h2>Our Products</h2>
+        <div id="productsGrid"></div>
+    </div>
+    <div class="col-lg-4">
+        <h3>Basket</h3>
+        <div style="display:block;"><strong style="width:100px">Product *quantity</strong><strong style="width:100px">Price $</strong></div>
+        <div id="basketGrid">
+
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+
+        var apiBaseUrl = 'http://localhost:2010/api/';
+
+        $(document).ready(function () {
+            loadProducts();
+            loadBasket();
+        });
+
+        function loadProducts() {
+
+            var request = new XMLHttpRequest();
+            request.open('GET', apiBaseUrl + 'products');
+            request.responseType = 'json';
+
+            request.onload = function () {
+
+                var response = request.response;
+                var template = '<div class="col-lg-4" style="text-align: center; margin-top:10px; height:300px;"><div style="width:200px; height:250px;"><img style=" width:100%; height:70%;display:block;" src="{THUMBNAIL}" /><h5>{TITLE}</h5><span>{PRICE}$</span></div><div style="width:200px; height:50px;"><input type="number" data-product-id="{ID}" placeholder="Quantity" style="width: 75px;"/><button data-product-id="{ID}" onClick="addToBasket(this);">Add to basket</button></div></div>';
+
+                $(response).each(function (index) {
+
+                    if (this.Thumbnail == undefined || this.Thumbnail == null || this.Thumbnail == '')
+                        this.Thumbnail = '/Content/imgs/No_Image_Available.gif';
+
+                    var product = template.replace('{ID}', this.Id).replace('{ID}', this.Id).replace('{THUMBNAIL}', this.Thumbnail).replace('{TITLE}', this.Title).replace('{PRICE}', this.Price);
+
+                    $('#productsGrid').append(product);
+                });
+
+            };
+
+            request.send();
+        }
+
+        function addToBasket(sender) {
+            var productId = $(sender).attr('data-product-id');
+            var quantity = $('input[data-product-id="' + productId + '"]').val();
+
+            if (quantity == undefined || quantity == null || quantity == '' || quantity <= 0) {
+                alert('Quantity is not valid!');
+                return;
+            }
+
+            var request = new XMLHttpRequest();
+            request.open('POST', apiBaseUrl + 'shoppingCartItems');
+            request.responseType = 'json';
+
+            //Send the proper header information along with the request
+            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            request.onreadystatechange = function () {
+                if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+                    loadBasket();
+                    $('input[data-product-id="' + productId + '"]').val('');
+                }
+            };
+
+            request.send('CustomerId=1&ProductId=' + productId + '&Quantity=' + quantity);
+        }
+
+        function removeFromBasket(cartItemId) {
+
+            var request = new XMLHttpRequest();
+            request.open('Delete', apiBaseUrl + 'shoppingCartItems/' + cartItemId);
+            request.responseType = 'json';
+
+            request.onreadystatechange = function () {
+                if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+                    loadBasket();
+                }
+            };
+
+            request.send();
+        }
+
+        function updateProductQuantity(cartItemId, newQuantity) {
+
+            if (newQuantity == 0) {
+                removeFromBasket(cartItemId);
+                return;
+            }
+
+            var request = new XMLHttpRequest();
+            request.open('PUT', apiBaseUrl + 'shoppingCartItems');
+            request.responseType = 'json';
+
+            //Send the proper header information along with the request
+            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            request.onreadystatechange = function () {
+                if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+                    loadBasket();
+                }
+            };
+
+            request.send('Id=' + cartItemId + '&Quantity=' + newQuantity);
+        }
+
+        function loadBasket() {
+            var request = new XMLHttpRequest();
+            request.open('GET', apiBaseUrl + 'shoppingCartItems/?customerId=1');
+            request.responseType = 'json';
+
+            request.onload = function () {
+                var response = request.response;
+                var template = '<div style="display:block; width:300px;"><span>{PRODUCT_TITLE} *{QUANTITY}</span><span style="width:100px">{CART_ITEM_PRICE}$</span><button onClick="removeFromBasket({ID});">Remove</button><button onClick="updateProductQuantity({ID},{QUANTITY+1});">+</button><button onClick="updateProductQuantity({ID},{QUANTITY-1});">-</button></div>';
+                $('#basketGrid').html('');
+
+                $(response.ShoppingCartItems).each(function (index) {
+                    var item = template.replace('{PRODUCT_TITLE}', this.ProductTitle)
+                        .replace('{QUANTITY}', this.Quantity).replace('{QUANTITY+1}', this.Quantity + 1).replace('{QUANTITY-1}', this.Quantity - 1)
+                        .replace('{CART_ITEM_PRICE}', this.CartItemPrice)
+                        .replace('{ID}', this.Id).replace('{ID}', this.Id).replace('{ID}', this.Id);
+                    $('#basketGrid').append(item);
+                });
+
+                $('#basketGrid').append('<div style="display:block;"><strong>Total Price</strong><strong style="float: right;">' + response.TotalPrice + '$</strong></div>');
+                $('#basketGrid').append('<div style="display:block;"><button onClick="clearBasket();">Clear Basket</button></div>');
+            };
+
+            request.send();
+        }
+
+        function clearBasket() {
+            var request = new XMLHttpRequest();
+            request.open('PUT', apiBaseUrl + 'customers/ClearShoppingCart/?customerId=1');
+            request.responseType = 'json';
+
+            //Send the proper header information along with the request
+            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            request.onreadystatechange = function () {
+                if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+                    loadBasket();
+                }
+            };
+
+            request.send();
+        }
+      
+
+    </script>
+}

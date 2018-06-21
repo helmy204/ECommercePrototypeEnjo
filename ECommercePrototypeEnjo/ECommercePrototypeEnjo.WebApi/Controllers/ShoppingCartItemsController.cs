@@ -19,21 +19,52 @@ namespace ECommercePrototypeEnjo.WebApi.Controllers
             _shoppingCartItemService = shoppingCartItemService;
         }
 
-        public void Post([FromBody]ShoppingCartItemModel shoppingCartItemModel)
+        public ShoppingCartItemList Get(int customerId)
         {
-            ShoppingCartItem shoppingCartItem = shoppingCartItemModel.ToEntity();
-            _shoppingCartItemService.Insert(shoppingCartItem);
+            IEnumerable<ShoppingCartItem> shoppingCartItems = _shoppingCartItemService.GetAllCartItems(customerId);
+            ShoppingCartItemList shoppingCartItemList = shoppingCartItems.ToModels();
+            return shoppingCartItemList;
         }
 
-        public void Put([FromBody]ShoppingCartItemModel shoppingCartItemModel)
+        public HttpStatusCode Post([FromBody]ShoppingCartItemModel shoppingCartItemModel)
         {
-            ShoppingCartItem shoppingCartItem= shoppingCartItemModel.ToEntity();
-            _shoppingCartItemService.UpdateProductQuantity(shoppingCartItem);
+            try
+            {
+                ShoppingCartItem shoppingCartItem = shoppingCartItemModel.ToEntity();
+                _shoppingCartItemService.Insert(shoppingCartItem);
+                return HttpStatusCode.OK;
+            }
+            catch (Exception ex)
+            {
+                return HttpStatusCode.InternalServerError;
+            }
         }
 
-        public void Delete(int id)
+        public HttpStatusCode Put([FromBody]ShoppingCartItemModel shoppingCartItemModel)
         {
-            _shoppingCartItemService.Delete(id);
+            try
+            {
+                ShoppingCartItem shoppingCartItem = shoppingCartItemModel.ToEntity();
+                _shoppingCartItemService.UpdateProductQuantity(shoppingCartItem);
+                return HttpStatusCode.OK;
+            }
+            catch (Exception ex)
+            {
+                return HttpStatusCode.InternalServerError;
+            }
+        }
+
+        public HttpStatusCode Delete(int id)
+        {
+            try
+            {
+                _shoppingCartItemService.Delete(id);
+                return HttpStatusCode.OK;
+            }
+            catch (Exception ex)
+            {
+                return HttpStatusCode.InternalServerError;
+            }
         }
     }
 }

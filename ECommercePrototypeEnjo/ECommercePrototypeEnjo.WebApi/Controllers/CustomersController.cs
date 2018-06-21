@@ -18,9 +18,17 @@ namespace ECommercePrototypeEnjo.WebApi.Controllers
         }
 
         [HttpPut]
-        public void ClearShoppingCart(int customerId)
+        public HttpStatusCode ClearShoppingCart(int customerId)
         {
-            _customerService.ClearShoppingCart(customerId);
+            try
+            {
+                _customerService.ClearShoppingCart(customerId);
+                return HttpStatusCode.OK;
+            }
+            catch (Exception ex)
+            {
+                return HttpStatusCode.InternalServerError;
+            }
         }
     }
 }

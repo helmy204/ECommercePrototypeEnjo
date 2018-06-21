@@ -49,5 +49,14 @@ namespace ECommercePrototypeEnjo.Service
 
             _shoppingCartItemRepository.Update(entity);
         }
+
+        public List<ShoppingCartItem> GetAllCartItems(int customerId)
+        {
+            IQueryable<ShoppingCartItem> shoppingCartItems = _shoppingCartItemRepository.Table.Where(c => c.CustomerId == customerId);
+
+            return shoppingCartItems.ToList();
+        }
+
+
     }
 }

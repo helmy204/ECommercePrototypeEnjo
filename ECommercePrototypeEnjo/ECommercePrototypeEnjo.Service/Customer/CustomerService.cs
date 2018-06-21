@@ -13,14 +13,17 @@ namespace ECommercePrototypeEnjo.Service
         #region Fields
 
         private readonly IRepository<Customer> _customerRepository;
+        private readonly IRepository<ShoppingCartItem> _shoppingCartItemRepository;
 
         #endregion Fields
 
         #region Ctor
 
-        public CustomerService(IRepository<Customer> customerRepository)
+        public CustomerService(IRepository<Customer> customerRepository,
+            IRepository<ShoppingCartItem> shoppingCartItemRepository)
         {
             _customerRepository = customerRepository;
+            _shoppingCartItemRepository = shoppingCartItemRepository;
         }
 
         #endregion Ctor
@@ -28,7 +31,12 @@ namespace ECommercePrototypeEnjo.Service
         public void ClearShoppingCart(int customerId)
         {
             Customer customer = _customerRepository.GetById(customerId);
-            customer.ClearShoppingCart();
+
+            foreach (var item in customer.ShoppingCartItems)
+            {
+                ShoppingCartItem shoppingCartItem = _shoppingCartItemRepository.GetById(item.Id);
+                _shoppingCartItemRepository.Delete(shoppingCartItem);
+            }
 
             _customerRepository.Update(customer);
         }

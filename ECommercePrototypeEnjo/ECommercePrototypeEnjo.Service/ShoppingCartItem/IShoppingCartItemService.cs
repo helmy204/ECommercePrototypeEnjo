@@ -12,5 +12,6 @@ namespace ECommercePrototypeEnjo.Service
         void Insert(ShoppingCartItem shoppingCartItem);
         void Delete(int id);
         void UpdateProductQuantity(ShoppingCartItem shoppingCartItem);
+        List<ShoppingCartItem> GetAllCartItems(int customerId);
     }
 }
